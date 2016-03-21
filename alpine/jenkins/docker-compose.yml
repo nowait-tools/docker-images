@@ -1,0 +1,7 @@
+jenkins:
+  image: nowait/jenkins:1.642.3
+  volumes:
+    - /var/lib/docker/data/jenkins:/var/lib/jenkins
+  ports:
+    - 8080:8080
+    - 50000:50000

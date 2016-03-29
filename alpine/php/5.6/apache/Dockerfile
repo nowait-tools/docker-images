@@ -8,5 +8,4 @@ COPY apache.conf /etc/apache2/conf.d/docker.conf
 
 EXPOSE 80
 
-ENTRYPOINT ["dumb-init","/usr/sbin/httpd"]
-CMD ["-DFOREGROUND"]
+CMD ["/usr/sbin/httpd","-DFOREGROUND"]

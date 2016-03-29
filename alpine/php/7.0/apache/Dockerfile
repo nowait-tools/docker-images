@@ -5,7 +5,8 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositor
     apk --no-cache add 'php7-apache2<7.1' && \
     mkdir -p /run/apache2
 
+COPY apache.conf /etc/apache2/conf.d/docker.conf
+
 EXPOSE 80
 
-ENTRYPOINT ["dumb-init","/usr/sbin/httpd"]
-CMD ["-DFOREGROUND"]
+CMD ["/usr/sbin/httpd","-DFOREGROUND"]

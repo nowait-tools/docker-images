@@ -6,7 +6,4 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-EXPOSE 80
-
-ENTRYPOINT ["dumb-init","php"]
-CMD ["-v"]
+CMD ["php","-v"]

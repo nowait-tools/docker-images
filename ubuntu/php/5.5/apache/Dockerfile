@@ -14,5 +14,4 @@ RUN a2enconf docker && \
 
 EXPOSE 80
 
-ENTRYPOINT ["dumb-init","/usr/sbin/apache2ctl"]
-CMD ["-DFOREGROUND"]
+CMD ["/usr/sbin/apache2ctl","-DFOREGROUND"]

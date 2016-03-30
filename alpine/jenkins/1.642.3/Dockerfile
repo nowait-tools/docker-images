@@ -21,10 +21,8 @@ RUN apk --no-cache add curl ttf-dejavu git openssh && \
 EXPOSE 8080 50000
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chown ${JENKINS_USER}:${JENKINS_GROUP} /usr/local/bin/docker-entrypoint.sh && \
-    chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chown ${JENKINS_USER}:${JENKINS_GROUP} /usr/local/bin/docker-entrypoint.sh
 
 USER ${JENKINS_USER}
 
-ENTRYPOINT ["dumb-init","/usr/local/bin/docker-entrypoint.sh"]
-CMD [""]
+CMD ["/usr/local/bin/docker-entrypoint.sh"]

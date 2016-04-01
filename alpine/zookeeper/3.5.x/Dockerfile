@@ -2,10 +2,11 @@ FROM nowait/java:openjre8-alpine
 MAINTAINER Mike Schroeder <mike.schroeder@nowait.com>
 
 ENV ZOOKEEPER_VERSION 3.5.1-alpha
+ENV ZOOKEEPER_MIRROR http://apache.mirrors.pair.com/zookeeper/
 
 RUN apk add --no-cache wget bash \
     && mkdir /opt \
-    && wget -q http://apache.mirrors.pair.com/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
+    && wget -q ${ZOOKEEPER_MIRROR}zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
     && tar -xvzf zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
     && mv zookeeper-${ZOOKEEPER_VERSION} /opt/zookeeper
 

@@ -20,6 +20,7 @@ It is laid out as follows:
 │   ├── jenkins
 │   │   ├── 1.642.2
 │   │   ├── 1.642.3
+│   │   └── 1.642.4
 │   ├── php
 │   │   ├── 5.6
 │   │   │   ├── apache
@@ -37,11 +38,14 @@ It is laid out as follows:
     └── php
         ├── 5.5
         │   ├── apache
-        │   └── cli
+        │   ├── cli
+        │   └── composer
         ├── 5.6
         │   ├── apache
-        │   └── cli
+        │   ├── cli
+        │   └── composer
         └── 7.0
             ├── apache
-            └── cli
+            ├── cli
+            └── composer
 ```

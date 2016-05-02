@@ -1,11 +1,10 @@
 FROM nowait/java:openjre8-alpine
 MAINTAINER Nowait <devops@nowait.com>
 
-RUN apk add --no-cache ca-certificates curl su-exec bash
-
 ENV ELASTICSEARCH_VERSION 2.3.2
 
-RUN mkdir -p /opt && \
+RUN apk add --no-cache ca-certificates curl su-exec bash \
+		mkdir -p /opt && \
 	  cd /tmp && \
 		curl https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz > elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
 	  tar -xzf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \

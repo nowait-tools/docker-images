@@ -1,8 +1,7 @@
 #!/bin/bash
-
 set -e
 
-confd -onetime -backend=rancher -prefix=/latest -confdir=/opt/elasticsearch
+su-exec elasticsearch:elasticsearch confd -onetime -backend=$CONFD_BACKEND -prefix=/latest -confdir=/opt/elasticsearch
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then

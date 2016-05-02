@@ -3,6 +3,7 @@ MAINTAINER Nowait <devops@nowait.com>
 
 ENV ELASTICSEARCH_VERSION 2.3.2
 ENV CONFD_VERSION 0.11.0
+ENV CONFD_BACKEND env
 
 RUN \
   apk add --no-cache ca-certificates curl su-exec bash && \

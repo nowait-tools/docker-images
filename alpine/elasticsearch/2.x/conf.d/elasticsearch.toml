@@ -1,0 +1,4 @@
+[template]
+src = "elasticsearch.yml.tmpl"
+dest = "/config/elasticsearch.yml"
+keys = []

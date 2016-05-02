@@ -2,18 +2,26 @@ FROM nowait/java:openjre8-alpine
 MAINTAINER Nowait <devops@nowait.com>
 
 ENV ELASTICSEARCH_VERSION 2.3.2
+ENV CONFD_VERSION 0.11.0
 
-RUN apk add --no-cache ca-certificates curl su-exec bash \
-		mkdir -p /opt && \
-	  cd /tmp && \
-		curl https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz > elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
-	  tar -xzf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
-	  rm -rf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
-	  mv elasticsearch-$ELASTICSEARCH_VERSION /opt/elasticsearch \
-		addgroup elasticsearch \
-		adduser -SDH elasticsearch -G elasticsearch
+RUN \
+  apk add --no-cache ca-certificates curl su-exec bash && \
+  mkdir -p /opt && \
+  cd /tmp && \
+  curl https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz > elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  tar -xzf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  rm -rf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  mv elasticsearch-$ELASTICSEARCH_VERSION /opt/elasticsearch && \
+  addgroup elasticsearch && \
+  adduser -SDH elasticsearch -G elasticsearch
 
-ENV PATH /opt/elasticsearch:$PATH
+RUN \
+  cd /tmp && \
+  curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64 > confd && \
+  mv confd /opt/confd &&
+  chmod +x /opt/confd
+
+ENV PATH /opt/elasticsearch:/opt::$PATH
 
 WORKDIR /opt/elasticsearch
 
@@ -24,12 +32,16 @@ RUN set -ex \
 		./logs \
 		./config \
 		./config/scripts \
+    ./conf.d \
+    ./templates \
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
 COPY config ./config
+COPY conf.d ./conf.d
+COPY templates ./templates
 
 VOLUME /opt/elasticsearch/data
 

@@ -18,10 +18,10 @@ RUN \
 RUN \
   cd /tmp && \
   curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64 > confd && \
-  mv confd /opt/confd &&
+  mv confd /opt/confd && \
   chmod +x /opt/confd
 
-ENV PATH /opt/elasticsearch:/opt::$PATH
+ENV PATH /opt/elasticsearch/bin:/opt::$PATH
 
 WORKDIR /opt/elasticsearch
 

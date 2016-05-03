@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-OPTS="$OPTS -Des.transport.tcp.port=9300 -Des.http.port=9200"
+OPTS="$OPTS --es.transport.tcp.port=9300 --es.http.port=9200"
 
 if [ -n "$ES_CLUSTER_NAME" ]; then
   OPTS="$OPTS --es.cluster.name=$ES_CLUSTER_NAME"

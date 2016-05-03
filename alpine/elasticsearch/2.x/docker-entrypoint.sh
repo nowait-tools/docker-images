@@ -1,11 +1,30 @@
 #!/bin/bash
 set -e
 
+OPTS="$OPTS -Des.transport.tcp.port=9300 -Des.http.port=9200"
+
+if [ -n "$ES_CLUSTER_NAME" ]; then
+  OPTS="$OPTS -Des.cluster.name=$ES_CLUSTER_NAME"
+fi
+
+if [ -n "$ES_MULTICAST" ]; then
+  OPTS="$OPTS -Des.discovery.zen.ping.multicast.enabled=$ES_MULTICAST"
+fi
+
+if [ -n "$ES_MASTER" ]; then
+  OPTS="$OPTS -Dnode.master=$ES_MASTER"
+fi
+
+if [ -n "$ES_DATA" ]; then
+  OPTS="$OPTS -Dnode.data=$ES_DATA"
+fi
+
+# Compile config file templates
 su-exec elasticsearch:elasticsearch confd -onetime -backend=$CONFD_BACKEND -prefix=/latest -confdir=/opt/elasticsearch
 
 # Add elasticsearch as command if needed
-if [ "${1:0:1}" = '-' ]; then
-	set -- elasticsearch "$@"
+if [[ $1 == -* ]]; then
+	set -- elasticsearch "$@" "$OPTS"
 fi
 
 # Drop root privileges if we are running elasticsearch

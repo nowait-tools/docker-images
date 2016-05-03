@@ -1,4 +1,8 @@
 [template]
 src = "elasticsearch.yml.tmpl"
 dest = "./config/elasticsearch.yml"
-keys = []
+keys = [
+  "/self/container/primary_ip",
+  "/self/service",
+  "/containers",
+]

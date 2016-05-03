@@ -22,7 +22,12 @@ RUN \
   mv confd /opt/confd && \
   chmod +x /opt/confd
 
-ENV PATH /opt/elasticsearch/bin:/opt::$PATH
+ENV PATH=/opt/elasticsearch/bin:/opt::$PATH \
+    OPTS="" \
+    ES_MASTER="" \
+    ES_DATA="" \
+    ES_CLUSTER_NAME="" \
+    ES_MULTICAST=""
 
 WORKDIR /opt/elasticsearch
 

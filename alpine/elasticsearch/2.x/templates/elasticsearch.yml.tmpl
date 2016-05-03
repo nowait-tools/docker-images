@@ -16,14 +16,14 @@ path.data: {{ $data_path }}
 {{ if $cluster -}}
 cluster.name: {{ $cluster }}
 
-{{ if and (isset $master) (eq $master true) }}
+{{ if (eq $master true) }}
 discovery.zen.minimum_master_nodes: 2
 node.master: true
 {{ else }}
 node.master: false
 {{ end -}}
 
-{{ if and (isset $data) (eq $data true) }}
+{{ if (eq $data true) }}
 node.data: true
 {{ else }}
 node.data: false

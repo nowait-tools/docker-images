@@ -10,7 +10,7 @@ discovery.zen.ping.unicast.hosts: {{ range ls "/self/service/containers" }}
 {{ if ne . "self" -}}
 {{ $health := getv (printf "/self/service/containers/%s/health_state" . ) -}}
 {{ $primary_ip := getv (printf "/self/service/containers/%s/primary_ip" .) -}}
-{{ if and (eq $health "healthy") (ne $host_ip $primary_ip) }}  - {{ $primary_ip }}{{end -}}
+{{ if and (eq $health "healthy") }}  - {{ $primary_ip }}{{end -}}
 {{end -}}
 {{end -}}
 {{end}}

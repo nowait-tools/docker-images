@@ -1,9 +1,8 @@
 # Placed by confd. Do not hand edit.
-{{ $host_ip := }}
-network.host: {{getv "/self/container/primary_ip"}}
+{{ $host_ip := getv "/self/container/primary_ip"}}
+network.host: {{ $host_ip }}
 
 bootstrap.mlockall: true
-discovery.zen.ping.multicast.enabled: false
 
 {{ $cluster := getenv "ES_CLUSTER_NAME" -}}
 {{ if $cluster -}}

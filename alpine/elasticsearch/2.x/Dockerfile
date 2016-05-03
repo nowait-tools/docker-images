@@ -2,7 +2,7 @@ FROM nowait/java:openjre8-alpine
 MAINTAINER Nowait <devops@nowait.com>
 
 ENV ELASTICSEARCH_VERSION 2.3.2
-ENV CONFD_VERSION 0.11.0
+ENV CONFD_VERSION 0.12.0-alpha3
 ENV CONFD_BACKEND env
 
 RUN \

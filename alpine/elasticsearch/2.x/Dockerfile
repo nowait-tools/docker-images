@@ -26,6 +26,7 @@ ENV PATH=/opt/elasticsearch/bin:/opt::$PATH \
     OPTS="" \
     ES_MASTER="" \
     ES_DATA="" \
+    ES_DATA_PATH="./data" \
     ES_CLUSTER_NAME="" \
     ES_MULTICAST=""
 
@@ -33,7 +34,7 @@ WORKDIR /opt/elasticsearch
 
 RUN set -ex \
 	&& for path in \
-		./data \
+		$ES_DATA_PATH \
 		./plugins \
 		./logs \
 		./config \

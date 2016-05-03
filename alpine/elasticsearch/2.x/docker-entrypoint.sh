@@ -4,19 +4,23 @@ set -e
 OPTS="$OPTS -Des.transport.tcp.port=9300 -Des.http.port=9200"
 
 if [ -n "$ES_CLUSTER_NAME" ]; then
-  OPTS="$OPTS -Des.cluster.name=$ES_CLUSTER_NAME"
+  OPTS="$OPTS --es.cluster.name=$ES_CLUSTER_NAME"
 fi
 
 if [ -n "$ES_MULTICAST" ]; then
-  OPTS="$OPTS -Des.discovery.zen.ping.multicast.enabled=$ES_MULTICAST"
+  OPTS="$OPTS --es.discovery.zen.ping.multicast.enabled=$ES_MULTICAST"
 fi
 
 if [ -n "$ES_MASTER" ]; then
-  OPTS="$OPTS -Dnode.master=$ES_MASTER"
+  OPTS="$OPTS --node.master=$ES_MASTER"
 fi
 
 if [ -n "$ES_DATA" ]; then
-  OPTS="$OPTS -Dnode.data=$ES_DATA"
+  OPTS="$OPTS --node.data=$ES_DATA"
+fi
+
+if [ -n "$ES_DATA_PATH" ]; then
+  OPTS="$OPTS --path.data=$ES_DATA_PATH"
 fi
 
 # Compile config file templates

@@ -1,5 +1,5 @@
 [template]
-src = "logging.tmpl"
+src = "logging.yml.tmpl"
 dest = "./config/logging.yml"
 keys = [
   "/elasticsearch/log/",

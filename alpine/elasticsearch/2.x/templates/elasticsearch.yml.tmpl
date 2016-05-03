@@ -4,8 +4,31 @@ network.host: {{ $host_ip }}
 
 bootstrap.mlockall: true
 
+{{ $data_path := getenv "ES_DATA_PATH" -}}
+{{ if $data_path }}
+path.data: {{ $data_path }}
+{{ end -}}
+
 {{ $cluster := getenv "ES_CLUSTER_NAME" -}}
+{{ $master := getenv "ES_MASTER" -}}
+{{ $data := getenv "ES_DATA" -}}
+
 {{ if $cluster -}}
+cluster.name: {{ $cluster }}
+
+{{ if and (isset $master) (eq $master true) }}
+discovery.zen.minimum_master_nodes: 2
+node.master: true
+{{ else }}
+node.master: false
+{{ end -}}
+
+{{ if and (isset $data) (eq $data true) }}
+node.data: true
+{{ else }}
+node.data: false
+{{ end -}}
+
 discovery.zen.ping.unicast.hosts: {{ range ls "/self/service/containers" }}
 {{ if ne . "self" -}}  - {{ getv (printf "/self/service/containers/%s/primary_ip" .) -}}{{end -}}
 {{end -}}

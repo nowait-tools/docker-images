@@ -28,7 +28,7 @@ su-exec elasticsearch:elasticsearch confd -onetime -backend=$CONFD_BACKEND -pref
 
 # Add elasticsearch as command if needed
 if [[ $1 == -* ]]; then
-	set -- elasticsearch "$@" "$OPTS"
+	set -- elasticsearch "$@"
 fi
 
 # Drop root privileges if we are running elasticsearch
@@ -44,4 +44,4 @@ fi
 # As argument is not related to elasticsearch,
 # then assume that user wants to run his own process,
 # for example a `bash` shell to explore this image
-exec "$@"
+exec "$@" "$OPTS"

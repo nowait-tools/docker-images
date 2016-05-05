@@ -5,4 +5,5 @@ keys = [
   "/self/container/primary_ip",
   "/self/service",
   "/containers",
+  "/services",
 ]

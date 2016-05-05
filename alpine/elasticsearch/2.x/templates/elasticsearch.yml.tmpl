@@ -29,8 +29,8 @@ node.data: true
 node.data: false
 {{ end -}}
 
-{{ $cluster_service := getenv "ES_CLUSTER_SERVICE" -}}
-discovery.zen.ping.unicast.hosts: {{ range ls (printf "/services/%s/containers" $cluster_service) }}
-{{ if ne . "self" -}}  - {{ getv (printf "/self/service/containers/%s/primary_ip" .) -}}{{end -}}
+{{ $cluster_service_url := (printf "/services/%s/containers" (getenv "ES_CLUSTER_SERVICE")) }}
+discovery.zen.ping.unicast.hosts: {{ range ls $cluster_service_url }}
+{{ if ne . "services" -}}  - {{ getv (printf "/self/service/containers/%s/primary_ip" .) -}}{{end -}}
 {{end -}}
 {{end}}

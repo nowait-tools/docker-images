@@ -12,6 +12,11 @@ path.data: {{ $data_path }}
 {{ $cluster := getenv "ES_CLUSTER_NAME" -}}
 {{ $master := getenv "ES_MASTER" -}}
 {{ $data := getenv "ES_DATA" -}}
+{{ $box_type := getenv "ES_BOX_TYPE" -}}
+
+{{ if $box_type -}}
+node.box_type: {{ $box_type }}
+{{ end - }}
 
 {{ if $cluster -}}
 cluster.name: {{ $cluster }}

@@ -27,6 +27,7 @@ ENV PATH=/opt/elasticsearch/bin:/opt::$PATH \
     ES_DATA=true \
     ES_DATA_PATH="./data" \
     ES_CLUSTER_NAME="" \
+    ES_BOX_TYPE="" \
     ES_CLUSTER_SERVICE="ElasticSearchMaster"
 
 WORKDIR /opt/elasticsearch

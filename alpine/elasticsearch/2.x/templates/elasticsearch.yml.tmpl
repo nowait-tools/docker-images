@@ -31,6 +31,6 @@ node.data: false
 
 {{ $cluster_service_url := (printf "/services/%s/containers" (getenv "ES_CLUSTER_SERVICE")) }}
 discovery.zen.ping.unicast.hosts: {{ range ls $cluster_service_url }}
-{{ if ne . "services" -}}  - {{ getv (printf "/self/service/containers/%s/primary_ip" .) -}}{{end -}}
+{{ if ne . "services" -}}  - {{ getv (printf "%s/%s/primary_ip" $cluster_service_url .) -}}{{end -}}
 {{end -}}
 {{end}}

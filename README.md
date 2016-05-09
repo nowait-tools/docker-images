@@ -12,6 +12,8 @@ It is laid out as follows:
 ├── alpine
 │   ├── base-image
 │   │   └── 3.3
+│   ├── elasticsearch
+│   │   └── 2.x
 │   ├── java
 │   │   ├── openjdk8
 │   │   ├── openjre8

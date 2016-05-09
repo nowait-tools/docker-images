@@ -1,0 +1,41 @@
+# Placed by confd. Do not hand edit.
+{{ $host_ip := getv "/self/container/primary_ip"}}
+network.host: {{ $host_ip }}
+
+bootstrap.mlockall: true
+
+{{ $data_path := getenv "ES_DATA_PATH" -}}
+{{ if $data_path }}
+path.data: {{ $data_path }}
+{{ end -}}
+
+{{ $cluster := getenv "ES_CLUSTER_NAME" -}}
+{{ $master := getenv "ES_MASTER" -}}
+{{ $data := getenv "ES_DATA" -}}
+{{ $box_type := getenv "ES_BOX_TYPE" -}}
+
+{{ if $box_type -}}
+node.box_type: {{ $box_type }}
+{{ end -}}
+
+{{ if $cluster -}}
+cluster.name: {{ $cluster }}
+
+{{ if (eq $master "true") }}
+discovery.zen.minimum_master_nodes: 2
+node.master: true
+{{ else }}
+node.master: false
+{{ end -}}
+
+{{ if (eq $data "true") }}
+node.data: true
+{{ else }}
+node.data: false
+{{ end -}}
+
+{{ $cluster_service_url := (printf "/services/%s/containers" (getenv "ES_CLUSTER_SERVICE")) }}
+discovery.zen.ping.unicast.hosts: {{ range ls $cluster_service_url }}
+{{ if ne . "services" -}}  - {{ getv (printf "%s/%s/primary_ip" $cluster_service_url .) -}}{{end -}}
+{{end -}}
+{{end}}

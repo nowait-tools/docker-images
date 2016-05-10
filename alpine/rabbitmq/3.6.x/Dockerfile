@@ -2,8 +2,9 @@ FROM nowait/erlang:latest
 MAINTAINER Nowait <devops@nowait.com>
 
 ENV RABBITMQ_VERSION=3.6.1 \
-    RABBITMQ_USER=rabbitmq \
-    RABBITMQ_PASS=rabbitmq \
+    RABBITMQ_DEFAULT_USER=guest \
+    RABBITMQ_DEFAULT_PASS=guest \
+    RABBITMQ_ERLANG_COOKIE="secret cookie here" \
     PATH=/opt/rabbitmq/sbin:$PATH \
     RABBITMQ_HOME=/opt/rabbitmq \
     RABBITMQ_PLUGINS=rabbitmq_management

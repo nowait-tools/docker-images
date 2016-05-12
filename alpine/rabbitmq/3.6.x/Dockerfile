@@ -19,11 +19,14 @@ RUN apk add --update --no-cache curl tar xz su-exec && \
     chown -R rabbitmq:rabbitmq /opt/rabbitmq && \
     chmod 777 /opt/rabbitmq
 
+COPY plugins /opt/rabbitmq/plugins
+
 VOLUME /opt/rabbitmq
 
 EXPOSE 4369 5671 5672 15671 15672 25672
 
 COPY docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
+RUN chown -R rabbitmq:rabbitmq /opt/rabbitmq/plugins && \
+    chmod +x /docker-entrypoint.sh
 
 CMD ["/docker-entrypoint.sh", "rabbitmq-server"]

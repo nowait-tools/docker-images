@@ -55,6 +55,7 @@ if [ "$1" = 'rabbitmq-server' ]; then
 		ssl_ca_file
 		ssl_cert_file
 		ssl_key_file
+    heartbeat
 	)
 
 	haveConfig=

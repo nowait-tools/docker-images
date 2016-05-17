@@ -19,7 +19,7 @@ RUN apk add --update --no-cache curl tar xz su-exec && \
     chown -R rabbitmq:rabbitmq /opt/rabbitmq && \
     chmod 777 /opt/rabbitmq
 
-COPY plugins /opt/rabbitmq/plugins
+COPY plugins/*.ez /opt/rabbitmq/plugins
 
 VOLUME /opt/rabbitmq
 

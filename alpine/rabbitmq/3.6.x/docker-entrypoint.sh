@@ -14,7 +14,7 @@ if [ -n "$RABBITMQ_PLUGINS" ]; then
   done
 fi
 
-if [ -n "$RABBITMQ_NODENAME" ]; then
+if [ -z "$RABBITMQ_NODENAME" ]; then
     export RABBITMQ_NODENAME=$(uuidgen)
 fi
 

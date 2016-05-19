@@ -1,6 +1,8 @@
 FROM nowait/erlang:latest
 MAINTAINER Nowait <devops@nowait.com>
 
+RUN apk add --update --no-cache util-linux
+
 ENV RABBITMQ_VERSION=3.6.1 \
     RABBITMQ_DEFAULT_USER=guest \
     RABBITMQ_DEFAULT_PASS=guest \

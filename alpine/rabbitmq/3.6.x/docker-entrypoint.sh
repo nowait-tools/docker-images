@@ -14,6 +14,10 @@ if [ -n "$RABBITMQ_PLUGINS" ]; then
   done
 fi
 
+if [ -n "$RABBITMQ_NODENAME" ]; then
+    export RABBITMQ_NODENAME=$(uuidgen)
+fi
+
 # Add rabbitmq-server as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- rabbitmq-server "$@"

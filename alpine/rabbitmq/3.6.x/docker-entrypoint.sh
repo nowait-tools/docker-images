@@ -186,7 +186,7 @@ if [ -z "$CLUSTER_WITH" ] ; then
   if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
   	exec su-exec rabbitmq:rabbitmq /scripts/start-server.sh "$@"
   else
-    exec /scripts/start-server.sh "$@"
+    exec /opt/scripts/start-server.sh "$@"
   fi
 else
   # Give master instance time to start up when launch all instances at same time via rancher-compose
@@ -195,18 +195,18 @@ else
   if [ -f /.CLUSTERED ] ; then
     # Handles container restart case
     if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
-    	exec su-exec rabbitmq:rabbitmq /scripts/start-server.sh "$@"
+    	exec su-exec rabbitmq:rabbitmq /opt/scripts/start-server.sh "$@"
     else
-      exec /scripts/start-server.sh "$@"
+      exec /opt/scripts/start-server.sh "$@"
     fi
   else
     # Handles container new (from scracth or after delete operation) case
     touch /.CLUSTERED
 
     if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
-    	exec su-exec rabbitmq:rabbitmq /scripts/cluster-server.sh "$@"
+    	exec su-exec rabbitmq:rabbitmq /opt/scripts/cluster-server.sh "$@"
     else
-      exec /scripts/cluster-server.sh "$@"
+      exec /opt/scripts/cluster-server.sh "$@"
     fi
 
   fi

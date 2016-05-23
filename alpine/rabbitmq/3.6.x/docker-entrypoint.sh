@@ -184,7 +184,7 @@ fi
 
 if [ -z "$CLUSTER_WITH" ] ; then
   if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
-  	exec su-exec rabbitmq:rabbitmq /scripts/start-server.sh "$@"
+  	exec su-exec rabbitmq:rabbitmq /opt/scripts/start-server.sh "$@"
   else
     exec /opt/scripts/start-server.sh "$@"
   fi

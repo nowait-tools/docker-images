@@ -24,15 +24,6 @@ if [ "$RABBITMQ_SSL_CERT_FILE" -a "$RABBITMQ_SSL_KEY_FILE" -a "$RABBITMQ_SSL_CA_
 	ssl=1
 fi
 
-# If long & short hostnames are not the same, use long hostnames
-if [ "$(hostname)" != "$(hostname -s)" ]; then
-	export RABBITMQ_USE_LONGNAME=true
-fi
-
-if [ -z "$RABBITMQ_NODENAME" ]; then
-    export RABBITMQ_NODENAME=`uuidgen`@`hostname`
-fi
-
 if [ "$RABBITMQ_ERLANG_COOKIE" ]; then
 	cookieFile='/opt/rabbitmq/.erlang.cookie'
 	if [ -e "$cookieFile" ]; then

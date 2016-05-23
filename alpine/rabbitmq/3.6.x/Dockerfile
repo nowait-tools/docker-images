@@ -1,8 +1,6 @@
 FROM nowait/erlang:latest
 MAINTAINER Nowait <devops@nowait.com>
 
-RUN apk add --update --no-cache util-linux
-
 ENV RABBITMQ_VERSION=3.6.1 \
     RABBITMQ_DEFAULT_USER=guest \
     RABBITMQ_DEFAULT_PASS=guest \
@@ -11,7 +9,7 @@ ENV RABBITMQ_VERSION=3.6.1 \
     RABBITMQ_HOME=/opt/rabbitmq \
     RABBITMQ_PLUGINS=rabbitmq_management
 
-RUN apk add --update --no-cache curl tar xz su-exec && \
+RUN apk add --update --no-cache util-linux ca-certificates curl tar xz su-exec && \
     mkdir -p /opt/rabbitmq && \
     curl -sSL https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.xz | tar -xJ -C /opt/rabbitmq --strip-components 1 && \
     rm -rf /share/**/rabbitmq*.xz && \
@@ -21,13 +19,15 @@ RUN apk add --update --no-cache curl tar xz su-exec && \
     chown -R rabbitmq:rabbitmq /opt/rabbitmq && \
     chmod 777 /opt/rabbitmq
 
-COPY plugins/*.ez /opt/rabbitmq/plugins
+COPY plugins /opt/rabbitmq/plugins
+COPY scripts /opt/scripts
 
 VOLUME /opt/rabbitmq
 
 EXPOSE 4369 5671 5672 15671 15672 25672
 
 COPY docker-entrypoint.sh /
+
 RUN chown -R rabbitmq:rabbitmq /opt/rabbitmq/plugins && \
     chmod +x /docker-entrypoint.sh
 

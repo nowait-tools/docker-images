@@ -14,10 +14,6 @@ if [ -n "$RABBITMQ_PLUGINS" ]; then
   done
 fi
 
-if [ -z "$RABBITMQ_NODENAME" ]; then
-    export RABBITMQ_NODENAME=$(uuidgen)
-fi
-
 # Add rabbitmq-server as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- rabbitmq-server "$@"
@@ -31,6 +27,10 @@ fi
 # If long & short hostnames are not the same, use long hostnames
 if [ "$(hostname)" != "$(hostname -s)" ]; then
 	export RABBITMQ_USE_LONGNAME=true
+fi
+
+if [ -z "$RABBITMQ_NODENAME" ]; then
+    export RABBITMQ_NODENAME=`uuidgen`@`hostname`
 fi
 
 if [ "$RABBITMQ_ERLANG_COOKIE" ]; then
@@ -163,14 +163,60 @@ if [ "$1" = 'rabbitmq-server' ]; then
 	fi
 fi
 
+# Exeucte if deploying to Rancher
+if [ $RANCHER_SERVICE_NAME ] ; then
 
-# Drop root privileges if we are running rabbitmq-server
-# allow the container to be started with `--user`
-if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
-	set -- su-exec rabbitmq:rabbitmq "$@"
+    # Rancher service name
+  echo "RANCHER_SERVICE_NAME: ${RANCHER_SERVICE_NAME}"
+
+  # Rancher stack name
+  STACK_NAME=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/stack/name)
+  echo "STACK_NAME: ${STACK_NAME}"
+
+  # Number of container instances running as part of service (i.e. scale)
+  SERVICE_INSTANCES=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/scale)
+  echo "SERVICE_INSTANCES: ${SERVICE_INSTANCES}"
+
+  # Set RabbitMQ hostname to equal that of Container name
+  export HOSTNAME=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/container/name)
+  echo "HOSTNAME: ${HOSTNAME}"
+
+  # Cluster with first instance listed in service (only if mulitple instances)
+  if [ $SERVICE_INSTANCES -gt 1 ]; then
+    MASTER=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/containers/0)
+    if [ $MASTER != $HOSTNAME ]; then
+      CLUSTER_WITH=$MASTER
+      echo "CLUSTER_WITH: ${CLUSTER_WITH}"
+    fi
+  fi
 fi
 
-# As argument is not related to rabbitmq-server,
-# then assume that user wants to run his own process,
-# for example a `bash` shell to explore this image
-exec "$@"
+if [ -z "$CLUSTER_WITH" ] ; then
+  if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
+  	exec su-exec rabbitmq:rabbitmq /scripts/start-server.sh "$@"
+  else
+    exec /scripts/start-server.sh "$@"
+  fi
+else
+  # Give master instance time to start up when launch all instances at same time via rancher-compose
+  sleep 5
+
+  if [ -f /.CLUSTERED ] ; then
+    # Handles container restart case
+    if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
+    	exec su-exec rabbitmq:rabbitmq /scripts/start-server.sh "$@"
+    else
+      exec /scripts/start-server.sh "$@"
+    fi
+  else
+    # Handles container new (from scracth or after delete operation) case
+    touch /.CLUSTERED
+
+    if [ "$1" = 'rabbitmq-server' -a "$(id -u)" = '0' ]; then
+    	exec su-exec rabbitmq:rabbitmq /scripts/cluster-server.sh "$@"
+    else
+      exec /scripts/cluster-server.sh "$@"
+    fi
+
+  fi
+fi

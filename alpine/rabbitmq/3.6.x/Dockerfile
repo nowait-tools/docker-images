@@ -9,7 +9,7 @@ ENV RABBITMQ_VERSION=3.6.1 \
     RABBITMQ_HOME=/opt/rabbitmq \
     RABBITMQ_PLUGINS=rabbitmq_management
 
-RUN apk add --update --no-cache util-linux ca-certificates curl tar xz su-exec && \
+RUN apk add --update --no-cache ca-certificates curl tar xz su-exec util-linux && \
     mkdir -p /opt/rabbitmq && \
     curl -sSL https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.xz | tar -xJ -C /opt/rabbitmq --strip-components 1 && \
     rm -rf /share/**/rabbitmq*.xz && \

@@ -31,6 +31,6 @@ COPY docker-entrypoint.sh /
 RUN chown -R rabbitmq:rabbitmq /opt/rabbitmq/plugins && \
     chown -R rabbitmq:rabbitmq /opt/scripts && \
     chmod +x /docker-entrypoint.sh && \
-    chomd -R +x /opt/scripts/*
+    chmod -R +x /opt/scripts
 
 CMD ["/docker-entrypoint.sh", "rabbitmq-server"]

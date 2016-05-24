@@ -168,10 +168,15 @@ if [ $RANCHER_SERVICE_NAME ] ; then
   SERVICE_INSTANCES=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/scale)
   echo "SERVICE_INSTANCES: ${SERVICE_INSTANCES}"
 
+  # Set RabbitMQ hostname to equal that of Container name
+  export HOSTNAME=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/container/name)
+  export RABBITMQ_NODENAME="rabbit@$HOSTNAME"
+  echo "HOSTNAME: ${HOSTNAME}"
+
   # Cluster with first instance listed in service (only if mulitple instances)
   if [ $SERVICE_INSTANCES -gt 1 ]; then
     MASTER=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/containers/0)
-    if [ $MASTER != $(hostname) ]; then
+    if [ $MASTER != $HOSTNAME ]; then
       CLUSTER_WITH=$MASTER
       echo "CLUSTER_WITH: ${CLUSTER_WITH}"
     fi

@@ -22,7 +22,7 @@
 # old hostname.
 echo ""
 echo "Removing current hostname from cluster.  Ignore any error stating not in cluster or node is not a cluster"
-rabbitmqctl -n rabbit@$CLUSTER_WITH forget_cluster_node rabbit@$(hostname)
+rabbitmqctl -n rabbit@$CLUSTER_WITH forget_cluster_node rabbit@$HOSTNAME
 sleep 5
 
 rabbitmq-server "$@"&

@@ -32,4 +32,4 @@ RUN chown -R rabbitmq:rabbitmq /opt/rabbitmq/plugins && \
     chmod +x /docker-entrypoint.sh && \
     chmod -R +x /opt/scripts
 
-CMD ["/docker-entrypoint.sh", "rabbitmq-server"]
+CMD ["/docker-entrypoint.sh"]

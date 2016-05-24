@@ -14,6 +14,7 @@ It is laid out as follows:
 │   │   └── 3.3
 │   ├── elasticsearch
 │   │   └── 2.x
+│   ├── erlang
 │   ├── java
 │   │   ├── openjdk8
 │   │   ├── openjre8
@@ -22,7 +23,7 @@ It is laid out as follows:
 │   ├── jenkins
 │   │   ├── 1.642.2
 │   │   ├── 1.642.3
-│   │   └── 1.642.4
+│   │   ├── 1.642.4
 │   │   └── 1.651.1
 │   ├── php
 │   │   ├── 5.6
@@ -31,9 +32,11 @@ It is laid out as follows:
 │   │   └── 7.0
 │   │       ├── apache
 │   │       └── cli
-│   └── python
-│       ├── 2.x
-│       └── 3.x
+│   ├── python
+│   │   ├── 2.x
+│   │   └── 3.x
+│   └── rabbitmq
+│       └── 3.6.x
 └── ubuntu
     ├── base-image
     │   ├── 14.04.4
@@ -50,5 +53,5 @@ It is laid out as follows:
         └── 7.0
             ├── apache
             ├── cli
-            └── composer
+            └── composer
 ```

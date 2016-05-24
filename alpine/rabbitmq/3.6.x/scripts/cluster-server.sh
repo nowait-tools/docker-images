@@ -1,4 +1,5 @@
 #!/bin/bash
+set -m
 
 # When restarting a container, RabbitMQ will fail to boot with some a
 # message like:
@@ -22,6 +23,8 @@
 # old hostname.
 echo ""
 echo "Removing current hostname from cluster.  Ignore any error stating not in cluster or node is not a cluster"
+echo "$CLUSTER_WITH"
+echo "$HOSTNAME"
 rabbitmqctl -n rabbit@$CLUSTER_WITH forget_cluster_node rabbit@$HOSTNAME
 sleep 5
 

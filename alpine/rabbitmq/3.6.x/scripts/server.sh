@@ -160,7 +160,7 @@ if [ $RANCHER_SERVICE_NAME ] ; then
   if [ $SERVICE_INSTANCES -gt 1 ]; then
     MASTER=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/containers/0)
     if [ $MASTER != $HOSTNAME ]; then
-      CLUSTER_WITH=$MASTER
+      export CLUSTER_WITH=$MASTER
       echo "CLUSTER_WITH: ${CLUSTER_WITH}"
     fi
   fi

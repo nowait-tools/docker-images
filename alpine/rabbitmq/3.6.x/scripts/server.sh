@@ -172,11 +172,11 @@ else
   # Give master instance time to start up when launch all instances at same time via rancher-compose
   sleep 5
 
-  if [ -f /.CLUSTERED ] ; then
+  if [ -f /opt/rabbitmq/.CLUSTERED ] ; then
       exec /opt/scripts/start-server.sh "$@"
   else
     # Handles container new (from scracth or after delete operation) case
-    touch /.CLUSTERED
+    touch /opt/rabbitmq/.CLUSTERED
     exec /opt/scripts/cluster-server.sh "$@"
   fi
 fi

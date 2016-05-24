@@ -25,7 +25,7 @@ echo "Removing current hostname from cluster.  Ignore any error stating not in c
 rabbitmqctl -n rabbit@$CLUSTER_WITH forget_cluster_node rabbit@$HOSTNAME
 sleep 5
 
-rabbitmq-server "$@"&
+rabbitmq-server "$@" &
 sleep 10
 
 rabbitmqctl stop_app

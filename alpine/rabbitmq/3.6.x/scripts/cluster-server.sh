@@ -19,7 +19,7 @@ set -m
 #                          [<0.368.0>,{init,<0.366.0>},infinity]}}}}},
 #         {rabbit_mgmt_app,start,[normal,[]]}}}
 #
-# This is fixed by first using the RabbitMW Control tool to remove the
+# This is fixed by first using the RabbitMQ Control tool to remove the
 # old hostname.
 echo ""
 echo "Removing current hostname from cluster.  Ignore any error stating not in cluster or node is not a cluster"

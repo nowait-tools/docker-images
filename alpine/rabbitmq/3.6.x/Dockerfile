@@ -13,8 +13,8 @@ RUN apk add --update --no-cache ca-certificates curl tar xz su-exec util-linux &
     mkdir -p /opt/rabbitmq && \
     curl -sSL https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.xz | tar -xJ -C /opt/rabbitmq --strip-components 1 && \
     rm -rf /share/**/rabbitmq*.xz && \
-    addgroup -g 199 rabbitmq && \
-    adduser -SD -u 1999 rabbitmq -G rabbitmq -h /opt/rabbitmq
+    addgroup -g 1999 rabbitmq && \
+    adduser -SD -u 199 rabbitmq -G rabbitmq -h /opt/rabbitmq
 
 COPY plugins /opt/rabbitmq/plugins
 COPY scripts /opt/scripts

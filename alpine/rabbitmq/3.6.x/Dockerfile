@@ -25,7 +25,7 @@ EXPOSE 4369 5671 5672 15671 15672 25672
 
 COPY docker-entrypoint.sh /
 
-RUN chown -R rabbitmq:rabbitmq /opt/rabbitmq && \
+RUN chown -R $(id -u rabbitmq):$(id -g rabbitmq) /opt/rabbitmq && \
     chmod +x /docker-entrypoint.sh && \
     chmod -R +x /opt/scripts
 

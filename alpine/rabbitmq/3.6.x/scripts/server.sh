@@ -26,13 +26,13 @@ fi
 touch /opt/rabbitmq/etc/rabbitmq/rabbitmq.config
 
 configs=(
-	# https://www.rabbitmq.com/configure.html
-	default_pass
-	default_user
-	default_vhost
-	ssl_ca_file
-	ssl_cert_file
-	ssl_key_file
+  # https://www.rabbitmq.com/configure.html
+  default_pass
+  default_user
+  default_vhost
+  ssl_ca_file
+  ssl_cert_file
+  ssl_key_file
   heartbeat
 )
 

@@ -119,8 +119,6 @@ if [ "$haveConfig" ]; then
 		  }
 		].
 	EOF
-
-  chown rabbitmq:rabbitmq /opt/rabbitmq/etc/rabbitmq/rabbitmq.config
 fi
 
 if [ "$ssl" ]; then

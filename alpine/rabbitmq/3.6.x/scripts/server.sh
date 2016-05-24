@@ -24,6 +24,7 @@ fi
 
 #Build configuration file
 touch /opt/rabbitmq/etc/rabbitmq/rabbitmq.config
+chmod 600 /opt/rabbitmq/etc/rabbitmq/rabbitmq.config
 
 configs=(
   # https://www.rabbitmq.com/configure.html

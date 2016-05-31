@@ -5,18 +5,8 @@ This docker image is an easy way to allow services that use docker-compose to be
 This image is opinionated in how it should be used.  The following is to describe how to properly use this image.
 
 The dredd image assumes the following
-- Makefile is mounted at /src/Makefile that declares the following targets
-  - start
-    - Target that starts the web service via docker-compose
-  - stop
-    - Target that restarts the web service with a clean dataset, most likely stopping the database container, removing it
-  - clean
-    - Stops all docker containers that started with start target and removes the containers
-
 - dredd.yml mounted at /src/dredd.yml and all files needed by dredd.yml
-
 - docker socket must be bind mounted
-
 - COMPOSE_PROJECT_NAME must be set.
   - This ensures that the services started by docker-compose will be added to a network with the name "$COMPOSE_PROJECT_NAME_"default.  The network name must be known ahead of time so that the dredd conatiner can add itself to the network allowing dredd to make requests to the web service
 

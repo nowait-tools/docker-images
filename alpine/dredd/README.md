@@ -1,17 +1,17 @@
 ## Dredd docker image
 
-This docker image is an easy way to allow services that use docker-compose to be tested via dredd.
-
-This image is opinionated in how it should be used.  The following is to describe how to properly use this image.
+This docker image is an easy way to allow services that use docker-compose to be tested via dredd.  This image is opinionated in how it should be used.  The following is to describe how to properly use this image.
 
 The dredd image assumes the following
-- dredd.yml mounted at /src/dredd.yml and all files needed by dredd.yml
+- dredd.yml mounted at `/src/dredd.yml` and all files needed by dredd.yml
 - docker socket must be bind mounted
-- COMPOSE_PROJECT_NAME must be set.
-  - This ensures that the services started by docker-compose will be added to a network with the name "$COMPOSE_PROJECT_NAME_"default.  The network name must be known ahead of time so that the dredd conatiner can add itself to the network allowing dredd to make requests to the web service
+- `COMPOSE_PROJECT_NAME` environment variable must be set.
+  - This ensures that the services started by docker-compose will be added to a network with the name `"$COMPOSE_PROJECT_NAME_"default`.  The network name must be known ahead of time so that the dredd conatiner can add itself to the network allowing dredd to make requests to the web service
 
 ### Suggestions
 The hookfiles used by the dredd.yml must reset the database to a known state at the beginning of each test.  The following is an example dredd.yml, hooks.js and Makefile that accomplish this.  It is not required to use this approach but if the database is not reset to a known state at the beginning of each dredd transaction there is the potential for errors to occur relating to data state.
+
+Dredd.yml
 
 ```yml
 dry-run: null
@@ -49,6 +49,8 @@ blueprint: docs/api.apib
 endpoint: "http://service:3000"
 ```
 
+Makefile
+
 ```Makefile
 .PHONY: stop start clean
 .IGNORE: stop start clean
@@ -68,6 +70,7 @@ clean:
   docker-compose rm -f
 ```
 
+hooks.js
 ```js
 var hooks = require('hooks')
 var execSync = require('child_process').execSync

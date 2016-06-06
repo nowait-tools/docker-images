@@ -12,6 +12,7 @@ It is laid out as follows:
 ├── alpine
 │   ├── base-image
 │   │   └── 3.3
+│   ├── cron
 │   ├── dredd
 │   ├── elasticsearch
 │   │   └── 2.x
@@ -34,8 +35,6 @@ It is laid out as follows:
 │   │   └── 3.x
 │   └── rabbitmq
 │       └── 3.6.x
-├── scratch
-│   └── cron
 └── ubuntu
     ├── base-image
     │   ├── 14.04.4

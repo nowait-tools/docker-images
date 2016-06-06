@@ -12,6 +12,7 @@ It is laid out as follows:
 ├── alpine
 │   ├── base-image
 │   │   └── 3.3
+│   ├── dredd
 │   ├── elasticsearch
 │   │   └── 2.x
 │   ├── erlang
@@ -27,31 +28,20 @@ It is laid out as follows:
 │   │   └── 1.651.1
 │   ├── php
 │   │   ├── 5.6
-│   │   │   ├── apache
-│   │   │   └── cli
 │   │   └── 7.0
-│   │       ├── apache
-│   │       └── cli
 │   ├── python
 │   │   ├── 2.x
 │   │   └── 3.x
 │   └── rabbitmq
 │       └── 3.6.x
+├── scratch
+│   └── cron
 └── ubuntu
     ├── base-image
     │   ├── 14.04.4
     │   └── 16.04
     └── php
         ├── 5.5
-        │   ├── apache
-        │   ├── cli
-        │   └── composer
         ├── 5.6
-        │   ├── apache
-        │   ├── cli
-        │   └── composer
         └── 7.0
-            ├── apache
-            ├── cli
-            └── composer
 ```

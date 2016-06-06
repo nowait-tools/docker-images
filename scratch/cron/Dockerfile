@@ -1,6 +1,6 @@
-FROM scratch
+FROM nowait/alpine:latest
 MAINTAINER Nowait <devops@nowait.com>
 
-COPY rancher-cron /
-RUN chmod +x /rancher-cron
-CMD ["/rancher-cron"]
+COPY rancher_cron /rancher_cron
+RUN chmod +x /rancher_cron
+CMD ["/rancher_cron"]

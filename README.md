@@ -11,7 +11,8 @@ It is laid out as follows:
 ```
 ├── alpine
 │   ├── base-image
-│   │   └── 3.3
+│   │   ├── 3.3
+│   │   └── 3.4
 │   ├── elasticsearch
 │   │   └── 2.x
 │   ├── erlang

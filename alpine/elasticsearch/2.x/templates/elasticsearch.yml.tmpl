@@ -1,6 +1,5 @@
 # Placed by confd. Do not hand edit.
-{{ $host_ip := getv "/self/container/primary_ip"}}
-network.host: {{ $host_ip }}
+network.host: _eth0_
 
 bootstrap.mlockall: true
 

@@ -7,11 +7,11 @@ ENV COMPOSER_VERSION=1.1.2
 RUN apk add --no-cache curl php7 php7-json php7-phar php7-openssl php7-mbstring && \
     curl -sS https://getcomposer.org/installer | php7 -- \
     --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION && \
-    ln -s /usr/bin/php7 /usr/bin/php && \
+    ln -sf /usr/bin/php7 /usr/bin/php && \
     apk del curl
 
 WORKDIR /src
 VOLUME /src
 
-ENTRYPOINT ["/usr/local/bin/composer"]
+ENTRYPOINT ["/usr/local/bin/composer","--ignore-platform-reqs"]
 CMD ["--version"]

@@ -11,5 +11,5 @@ RUN apk add --no-cache curl php php-json php-phar php-openssl && \
 WORKDIR /src
 VOLUME /src
 
-ENTRYPOINT ["/usr/local/bin/composer"]
+ENTRYPOINT ["/usr/local/bin/composer","--ignore-platform-reqs"]
 CMD ["--version"]

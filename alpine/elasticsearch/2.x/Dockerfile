@@ -20,7 +20,8 @@ RUN apk add --no-cache ca-certificates curl su-exec && \
     rm -rf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
     mv elasticsearch-$ELASTICSEARCH_VERSION /opt/elasticsearch && \
     addgroup elasticsearch && \
-    adduser -SDH elasticsearch -G elasticsearch
+    adduser -SDH elasticsearch -G elasticsearch && \
+    /opt/elasticsearch/bin/plugin install cloud-aws
 
 RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64 > /opt/confd && \
     chmod +x /opt/confd

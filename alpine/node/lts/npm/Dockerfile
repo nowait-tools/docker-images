@@ -39,5 +39,5 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
 
 WORKDIR /src
 
-ENTRYPOINT ["dumb-init","/usr/bin/npm"]
+ENTRYPOINT ["/usr/bin/npm"]
 CMD ["-v"]

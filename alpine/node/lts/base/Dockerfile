@@ -43,5 +43,4 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
 EXPOSE 3000
 WORKDIR /src
 
-ENTRYPOINT ["dumb-init","/usr/bin/node"]
-CMD ["-v"]
+CMD ["/usr/bin/node","-v"]

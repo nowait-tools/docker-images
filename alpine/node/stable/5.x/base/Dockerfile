@@ -23,7 +23,7 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
     tar -zxf node-${VERSION}.tar.gz && \
     cd node-${VERSION} && \
     export GYP_DEFINES="linux_use_gold_flags=0" && \
-    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
+    ./configure --prefix=/usr ${CONFIG_FLAGS} --with-intl=small-icu --download=all && \
     NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     make -j${NPROC} -C out mksnapshot BUILDTYPE=Release && \
     paxctl -cm out/Release/mksnapshot && \

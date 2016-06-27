@@ -12,6 +12,8 @@ It is laid out as follows:
 ├── alpine
 │   ├── base-image
 │   │   └── 3.3
+│   │   ├── 3.3
+│   │   └── 3.4
 │   ├── cron
 │   ├── dredd
 │   ├── elasticsearch
@@ -27,6 +29,11 @@ It is laid out as follows:
 │   │   ├── 1.642.3
 │   │   ├── 1.642.4
 │   │   └── 1.651.1
+│   ├── node
+│   │   ├── lts
+│   │   └── stable
+│   │   │   ├── 5.x
+│   │   │   └── 6.x
 │   ├── php
 │   │   ├── 5.6
 │   │   └── 7.0

@@ -3,7 +3,7 @@ MAINTAINER Nowait "<devops@nowait.com>"
 
 ENV VERSION=v5.11.1 \
     NPM_VERSION=3.9.5 \
-    CONFIG_FLAGS="--fully-static --without-npm" \
+    CONFIG_FLAGS="--fully-static --without-npm --with-intl=small-icu --download=all" \
     DEL_PKGS="libgcc libstdc++" \
     RM_DIRS=/usr/include
 

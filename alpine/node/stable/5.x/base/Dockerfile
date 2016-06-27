@@ -3,7 +3,7 @@ MAINTAINER Nowait "<devops@nowait.com>"
 
 ENV VERSION=v5.11.1 \
     NPM_VERSION=3.9.5 \
-    CONFIG_FLAGS="--fully-static --without-npm" \
+    CONFIG_FLAGS="--fully-static --without-npm --with-intl=small-icu --download=all" \
     DEL_PKGS="libgcc libstdc++" \
     RM_DIRS=/usr/include
 
@@ -23,7 +23,7 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
     tar -zxf node-${VERSION}.tar.gz && \
     cd node-${VERSION} && \
     export GYP_DEFINES="linux_use_gold_flags=0" && \
-    ./configure --prefix=/usr ${CONFIG_FLAGS} --with-intl=small-icu --download=all && \
+    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
     NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     make -j${NPROC} -C out mksnapshot BUILDTYPE=Release && \
     paxctl -cm out/Release/mksnapshot && \

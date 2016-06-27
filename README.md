@@ -11,8 +11,11 @@ It is laid out as follows:
 ```
 ├── alpine
 │   ├── base-image
+│   │   └── 3.3
 │   │   ├── 3.3
 │   │   └── 3.4
+│   ├── cron
+│   ├── dredd
 │   ├── elasticsearch
 │   │   └── 2.x
 │   ├── erlang
@@ -33,11 +36,7 @@ It is laid out as follows:
 │   │   │   └── 6.x
 │   ├── php
 │   │   ├── 5.6
-│   │   │   ├── apache
-│   │   │   └── cli
 │   │   └── 7.0
-│   │       ├── apache
-│   │       └── cli
 │   ├── python
 │   │   ├── 2.x
 │   │   └── 3.x
@@ -49,15 +48,6 @@ It is laid out as follows:
     │   └── 16.04
     └── php
         ├── 5.5
-        │   ├── apache
-        │   ├── cli
-        │   └── composer
         ├── 5.6
-        │   ├── apache
-        │   ├── cli
-        │   └── composer
         └── 7.0
-            ├── apache
-            ├── cli
-            └── composer
 ```

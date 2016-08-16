@@ -8,7 +8,7 @@ docker pull nowait/php:7.0-coverage
 
 ### Usage
 
-This docker image is very opinionated in how it must be used.  You must pass an env named `PHP_MEMORY_LIMIT` at runtime so the entrypoint templates the php.ini correctly.  Since code coverage analysis is a very memory intensive process and highly dependent on project size, this allows the same image to be used across small and large projects.  You must mount the project's source code to `/src` inside the container.  In addition, the entrypoint will pass all provided arguments to the `phpdbg7` binary inside the container, which allows for running whatever command you want with `phpdbg7`.
+This docker image is very opinionated in how it must be used.  By default, the php memory limit is set to 128MB, this should be suitable for most projects.  For larger projects, you may override this default by passing an env named `PHP_MEMORY_LIMIT` at runtime.  Since code coverage analysis is a very memory intensive process and highly dependent on project size, this allows the same image to be used across small and large projects.  You must mount the project's source code to `/src` inside the container.  In addition, the entrypoint will pass all provided arguments to the `phpdbg7` binary inside the container, which allows for running whatever command you want with `phpdbg7`.
 
 For a typical app that uses Phpunit for the test suite the following command would generate a code coverage report.
 

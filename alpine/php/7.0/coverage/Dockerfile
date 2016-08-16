@@ -10,6 +10,8 @@ RUN apk add --no-cache php7-xdebug php7-phpdbg \
 
 WORKDIR src
 
+ENV PHP_MEMORY_LIMIT="128M"
+
 COPY php.ini.default /etc/php7/conf.d/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -10,6 +10,8 @@ RUN apk add --no-cache php7-xdebug php7-phpdbg \
 
 WORKDIR src
 
-RUN echo "variables_order=EGPCS;" > /etc/php7/conf.d/00_env.ini
+COPY php.ini.default /etc/php7/conf.d/
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["phpdbg7 -qrr /src/bin/phpunit --coverage-html report/$(date +"%s")"]
+ENTRYPOINT ["/entrypoint.sh"]

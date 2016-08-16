@@ -1,0 +1,2 @@
+variables_order = EGPCS
+memory_limit = ${PHP_MEMORY_LIMIT}

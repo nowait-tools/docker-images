@@ -38,3 +38,12 @@ discovery.zen.ping.unicast.hosts: {{ range ls $cluster_service_url }}
 {{ if ne . "services" -}}  - {{ getv (printf "%s/%s/primary_ip" $cluster_service_url .) -}}{{end -}}
 {{end -}}
 {{end}}
+
+{{ $marvel_host := getenv "ES_MARVEL_HOST" -}}
+{{ if $marvel_host }}
+{{/* Example of what $marvel_host should be like http://es-mon2:9200 */}}
+marvel.agent.exporters:
+  id1:
+    type: http
+    host: ["{{ $marvel_host }}"]
+{{ end -}}

@@ -1,9 +1,9 @@
 FROM nowait/php:7.0-cli-alpine
 MAINTAINER Nowait <devops@nowait.com>
 
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-    apk --no-cache add 'php7-apache2<7.1' && \
-    mkdir -p /run/apache2
+RUN apk --no-cache add 'php7-apache2<7.1' && \
+    mkdir -p /run/apache2 && \
+    ln -s /dev/null /var/log/apache2/access_log 
 
 COPY apache.conf /etc/apache2/conf.d/docker.conf
 

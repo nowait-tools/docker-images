@@ -10,6 +10,8 @@ RUN apk add --no-cache curl php7 php7-json php7-phar php7-dom php7-pdo php7-soap
     ln -sf /usr/bin/php7 /usr/bin/php && \
     apk del curl
 
+COPY nowait.ini /etc/php7/conf.d/
+
 WORKDIR /src
 VOLUME /src
 

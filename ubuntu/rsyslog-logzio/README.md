@@ -16,4 +16,4 @@ You can then use the rsyslog container for the docker logging driver like so.
 docker run -d --log-driver syslog --log-opt "syslog-address=127.0.0.1" --log-opt "tag=nginx" nginx
 ```
 
-**Please note the syslog-address option specifying localhost**.  This is because the is from the perspective of the docker daemon.  If you are using a contianer orchestration platform like Rancher you cannot use dns names that your orchestration platform resolves since the docker daemon will not be able to resolve the hostname.
+**Please note the syslog-address option specifying localhost** (If using mac please specify the docker-machine ip).  This is because the is from the perspective of the docker daemon.  If you are using a contianer orchestration platform like Rancher you cannot use dns names that your orchestration platform resolves since the docker daemon will not be able to resolve the hostname.

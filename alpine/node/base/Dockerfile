@@ -1,11 +1,11 @@
 FROM nowait/alpine:3.3
 MAINTAINER Nowait "<devops@nowait.com>"
 
-ENV VERSION=v4.4.5 \
-    NPM_VERSION=2 \
-    CONFIG_FLAGS="--fully-static --without-npm" \
-    DEL_PKGS="libgcc libstdc++" \
-    RM_DIRS=/usr/include
+ARG VERSION=v6.9.1
+ARG NPM_VERSION=3.10.8
+ARG CONFIG_FLAGS="--fully-static --without-npm --with-intl=small-icu --download=all"
+ARG DEL_PKGS="libgcc libstdc++"
+ARG RM_DIRS=/usr/include
 
 RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg && \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 9554F04D7259F04124DE6B476D5A82AC7E37093B && \

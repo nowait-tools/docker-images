@@ -1,13 +1,10 @@
-FROM nowait/alpine:3.4
+FROM nowait/alpine:3.3
 MAINTAINER Nowait "<devops@nowait.com>"
 
-ENV VERSION=v5.11.1 \
-    NPM_VERSION=3.9.5 \
-    CONFIG_FLAGS="--fully-static --without-npm --with-intl=small-icu --download=all" \
-    DEL_PKGS="libgcc libstdc++" \
-    RM_DIRS=/usr/include
+ARG VERSION=v6.9.1
+ARG NPM_VERSION=3.10.8
 
-RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg && \
+RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg git && \
     gpg --keyserver pool.sks-keyservers.net --recv-keys 9554F04D7259F04124DE6B476D5A82AC7E37093B && \
     gpg --keyserver pool.sks-keyservers.net --recv-keys 94AE36675C464D64BAFA68DD7434390BDBE9B9C5 && \
     gpg --keyserver pool.sks-keyservers.net --recv-keys 0034A06D9D9B0064CE8ADF6BF1747F4AD2306D93 && \
@@ -40,7 +37,7 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
       /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
       /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
-EXPOSE 3000
 WORKDIR /src
 
-CMD ["/usr/bin/node","-v"]
+ENTRYPOINT ["/usr/bin/npm"]
+CMD ["-v"]

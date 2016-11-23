@@ -1,4 +1,4 @@
-FROM nowait/php:7.0-cli-alpine
+FROM nowait/php:7.0.13-cli-alpine
 MAINTAINER Nowait <devops@nowait.com>
 
 RUN apk --no-cache add 'php7-apache2<7.1' && \

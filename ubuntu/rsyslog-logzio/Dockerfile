@@ -7,6 +7,7 @@ RUN ln -sf /dev/stdout /var/log/syslog \
     && chmod +x /entrypoint.sh
 
 ENV LOGZIO_TOKEN="sample token" \
-    TYPE=TYPE
+    TYPE="TYPE" \
+    LOG_FORMAT="json"
 
 ENTRYPOINT ["/entrypoint.sh"]

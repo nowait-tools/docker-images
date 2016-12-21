@@ -7,7 +7,7 @@ This docker image is used for sending rsyslog logs to logzio.  The motivation fo
 This image is run on every host binding port 514 to the host machine like so.
 
 ```
-docker run -d -p 514:514 -e "LOGZIO_TOKEN=token" nowait/rsyslog-logzio:0.1.0
+docker run -d -p 514:514 -e "LOGZIO_TOKEN=token" -e "TYPE=log-type" nowait/rsyslog-logzio:0.1.0
 ```
 
 You can then use the rsyslog container for the docker logging driver like so.

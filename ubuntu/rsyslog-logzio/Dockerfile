@@ -6,6 +6,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN ln -sf /dev/stdout /var/log/syslog \
     && chmod +x /entrypoint.sh
 
-ENV LOGZIO_TOKEN="sample token"
+ENV LOGZIO_TOKEN="sample token" \
+    TYPE=TYPE
 
 ENTRYPOINT ["/entrypoint.sh"]

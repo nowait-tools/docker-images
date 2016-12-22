@@ -4,7 +4,15 @@ This docker image is used for sending rsyslog logs to logzio.  The motivation fo
 
 ### Usage
 
-This image is run on every host binding port 514 to the host machine like so.
+#### Configuration Options
+- Environment variables
+  - LOGZIO_TOKEN -- token that authenticates you with logzio.  can be found in your logzio account
+  - TYPE -- the `type` field you want applied so logzio can identify and appropriately parse your logs
+  - LOG_FORMAT -- please see the next paragraph.
+
+Logzio provides two different endpoints for syslog: syslog and json format.  If your log messages are valid json then you can send it to the json endpoint by setting the `LOG_FORMAT` environment variable to `json`.  Any other value for the `LOG_FORMAT` environment will result in the logs being sent to the syslog format endpoint.
+
+An example of how to run this is shown below.
 
 ```
 docker run -d -p 514:514 -e "LOGZIO_TOKEN=token" -e "TYPE=log-type" -e "LOG_FORMAT=json" nowait/rsyslog-logzio:0.4.0

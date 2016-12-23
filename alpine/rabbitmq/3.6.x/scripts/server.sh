@@ -135,8 +135,9 @@ if [ "$ssl" ]; then
 	export RABBITMQ_CTL_ERL_ARGS="$RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS"
 fi
 
-# Exeucte if deploying to Rancher
-if [ $RANCHER_SERVICE_NAME ] ; then
+# Execute if deploying to Rancher
+RANCHER_SERVICE_NAME=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/service/name)
+if [ 0 -eq $? ] ; then
 
     # Rancher service name
   echo "RANCHER_SERVICE_NAME: ${RANCHER_SERVICE_NAME}"
@@ -146,7 +147,7 @@ if [ $RANCHER_SERVICE_NAME ] ; then
   echo "STACK_NAME: ${STACK_NAME}"
 
   # Number of container instances running as part of service (i.e. scale)
-  SERVICE_INSTANCES=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/scale)
+  SERVICE_INSTANCES=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/service/scale)
   echo "SERVICE_INSTANCES: ${SERVICE_INSTANCES}"
 
   # Set RabbitMQ hostname to equal that of Container name
@@ -157,7 +158,7 @@ if [ $RANCHER_SERVICE_NAME ] ; then
 
   # Cluster with first instance listed in service (only if mulitple instances)
   if [ $SERVICE_INSTANCES -gt 1 ]; then
-    MASTER=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/services/${RANCHER_SERVICE_NAME}/containers/0)
+    MASTER=$(curl --retry 5 --retry-delay 5 --connect-timeout 3 -s http://rancher-metadata/2015-07-25/self/service/containers/0)
     if [ $MASTER != $HOSTNAME ]; then
       export CLUSTER_WITH=$MASTER
       echo "CLUSTER_WITH: ${CLUSTER_WITH}"

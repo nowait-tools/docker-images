@@ -6,6 +6,7 @@ RUN apk --no-cache add 'php7.1-apache2' && \
     ln -s /dev/null /var/log/apache2/access_log 
 
 COPY apache.conf /etc/apache2/conf.d/docker.conf
+COPY status.conf /etc/apache2/conf.d/status.conf
 
 EXPOSE 80
 

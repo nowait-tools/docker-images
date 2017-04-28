@@ -1,4 +1,4 @@
-FROM nowait/alpine:3.3
+FROM nowait/alpine:3.4
 MAINTAINER Nowait "<devops@nowait.com>"
 
 ARG VERSION=v7.7.3

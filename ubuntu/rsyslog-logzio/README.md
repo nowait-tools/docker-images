@@ -15,7 +15,7 @@ Logzio provides two different endpoints for syslog: syslog and json format.  If 
 An example of how to run this is shown below.
 
 ```
-docker run -d -p 514:514 -e "LOGZIO_TOKEN=token" -e "TYPE=log-type" -e "LOG_FORMAT=json" nowait/rsyslog-logzio:0.4.0
+docker run -d -p 514:514 -v /etc/hostname:/etc/hostname -e "LOGZIO_TOKEN=token" -e "TYPE=log-type" -e "LOG_FORMAT=json" nowait/rsyslog-logzio:1.1
 ```
 
 You can then use the rsyslog container for the docker logging driver like so.

@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get -y -q install software-properties-common python-software-properties
 RUN add-apt-repository ppa:adiscon/v8-stable
-RUN apt-get update && apt-get -y -q install rsyslog=8.23.0-0adiscon1trusty1
+RUN apt-get update && apt-get -y -q install rsyslog
 
 RUN rm /etc/rsyslog.conf
 

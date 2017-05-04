@@ -16,7 +16,6 @@ RUN ln -sf /dev/stdout /var/log/syslog \
 
 ENV LOGZIO_TOKEN="sample token" \
     TYPE="TYPE" \
-    LOG_FORMAT="json" \
-    HOST_HOSTNAME="test-hostname"
+    LOG_FORMAT="json"
 
 ENTRYPOINT ["/entrypoint.sh"]

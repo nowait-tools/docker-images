@@ -1,0 +1,9 @@
+version: '2'
+services:
+  rsyslog:
+    environment:
+      - LOGZIO_TOKEN=changeme
+  fluentd:
+    environment:
+      - AWS_KEY_ID=changeme
+      - AWS_SEC_KEY=changeme

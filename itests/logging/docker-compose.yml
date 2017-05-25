@@ -1,0 +1,26 @@
+version: '2'
+services:
+  nginx:
+    image: nginx
+    depends_on:
+      - rsyslog
+    ports:
+      - 80:80
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://127.0.0.1:514"
+        tag: nginx/dev
+  rsyslog:
+    image: nowait/rsyslog-logzio:1.2
+    network_mode: host
+    environment:
+      - TYPE=TYPE
+      - LOG_FORMAT=syslog
+    depends_on:
+      - fluentd
+  fluentd:
+    image: nowait/fluentd:0.1.0
+    network_mode: host
+    environment:
+      - S3_BUCKET=nw-logs-dev

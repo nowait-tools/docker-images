@@ -1,1 +1,1 @@
-docker-compose.override.yml
+itests/logging/docker-compose.override.yml

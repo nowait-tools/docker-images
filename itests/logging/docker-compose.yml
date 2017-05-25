@@ -12,7 +12,7 @@ services:
         syslog-address: "tcp://127.0.0.1:514"
         tag: nginx/dev
   rsyslog:
-    image: nowait/rsyslog-logzio:1.2.0-test1
+    image: nowait/rsyslog-logzio:1.2
     network_mode: host
     environment:
       - TYPE=TYPE
@@ -20,7 +20,7 @@ services:
     depends_on:
       - fluentd
   fluentd:
-    image: nowait/fluentd:0.1.0-test2
+    image: nowait/fluentd:0.1.0
     network_mode: host
     environment:
       - S3_BUCKET=nw-logs-dev

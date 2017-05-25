@@ -8,6 +8,7 @@ This docker-compose sets up a sample application (nginx) with the fluentd and rs
 
 ### Usage
 - `cp itests/logging/docker-compose.override.yml.copy itests/logging/docker-compose.override.yml`
+- Update `LOGZIO_TOKEN`, `AWS_KEY_ID` and `AWS_SEC_KEY` in `docker-compose.override.yml`
 - `cd itests/logging`
 - `docker-compose up -d`
 - Make requests to nginx and watch logs propagate to logzio and s3

@@ -5,6 +5,8 @@ COPY dumb-init_1.0.1_amd64 /usr/local/bin/dumb-init
 COPY su-exec /usr/local/bin/su-exec
 COPY su-exec-entrypoint /usr/local/bin/su-exec-entrypoint
 RUN chmod +x /usr/local/bin/su-exec \
-    && chmod +x /usr/local/bin/su-exec-entrypoint
+    && chmod +x /usr/local/bin/su-exec-entrypoint \
+    && apt-get update \
+    && apt-get install net-tools -y
 
 ENTRYPOINT ["dumb-init", "--single-child"]

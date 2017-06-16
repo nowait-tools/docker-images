@@ -1,4 +1,4 @@
-FROM nowait/ubuntu:16.04
+FROM nowait/ubuntu:16.04-1
 
 ENV PYTHONPATH=/src/vendor/lib/python2.7/site-packages:$PYTHONPATH
 

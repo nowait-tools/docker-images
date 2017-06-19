@@ -44,4 +44,5 @@ EXPOSE 3000
 WORKDIR /src
 ENV PATH=/src/node_modules/.bin:$PATH
 
+ENTRYPOINT ["su-exec-entrypoint"]
 CMD ["/usr/bin/node","-v"]

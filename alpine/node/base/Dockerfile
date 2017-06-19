@@ -42,5 +42,7 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
 
 EXPOSE 3000
 WORKDIR /src
+ENV PATH=/src/node_modules/.bin:$PATH
 
+ENTRYPOINT ["su-exec-entrypoint"]
 CMD ["/usr/bin/node","-v"]

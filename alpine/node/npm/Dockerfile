@@ -38,6 +38,7 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libs
       /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
 WORKDIR /src
+ENV PATH=/src/node_modules/.bin:$PATH
 
-ENTRYPOINT ["/usr/bin/npm"]
-CMD ["-v"]
+ENTRYPOINT ["su-exec-entrypoint"]
+CMD ["npm -v"]

@@ -1,8 +1,8 @@
-FROM nowait/alpine:3.4
+FROM nowait/alpine:3.4-1
 MAINTAINER Nowait "<devops@nowait.com>"
 
-ARG VERSION=v7.7.3
-ARG NPM_VERSION=4.1.2
+ARG VERSION=v6.11.1
+ARG NPM_VERSION=3.10.10
 ARG CONFIG_FLAGS="--fully-static --without-npm --with-intl=small-icu --download=all"
 ARG DEL_PKGS="libgcc libstdc++"
 ARG RM_DIRS=/usr/include

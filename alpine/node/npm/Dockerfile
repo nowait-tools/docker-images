@@ -1,8 +1,8 @@
-FROM nowait/alpine:3.4
+FROM nowait/alpine:3.4-1
 MAINTAINER Nowait "<devops@nowait.com>"
 
-ARG VERSION=v7.7.3
-ARG NPM_VERSION=4.1.2
+ARG VERSION=v6.11.1
+ARG NPM_VERSION=3.10.10
 
 RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg git && \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \

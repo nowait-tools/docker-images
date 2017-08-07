@@ -1,6 +1,6 @@
 FROM alpine:3.6
 
-ENV FLOW_VERSION=0.50.0
+ENV FLOW_VERSION=0.52.0
 
 RUN apk add --no-cache --virtual .build-deps-flow \
      alpine-sdk \
